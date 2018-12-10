@@ -1,0 +1,3 @@
+# Routings
+GET    /users/:id      com.eleks.playhttp.Controller.getUser(id: Long)
+POST   /users          com.eleks.playhttp.Controller.saveUser
