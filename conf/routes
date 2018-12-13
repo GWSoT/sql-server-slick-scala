@@ -1,3 +1,4 @@
 # Routings
-GET    /users/:id      com.eleks.playhttp.Controller.getUser(id: Long)
-POST   /users          com.eleks.playhttp.Controller.saveUser
+GET    /users/:id            com.eleks.playhttp.Controller.getUser(id: Long)
+POST   /users                com.eleks.playhttp.Controller.saveUser
+DELETE /users/:id            com.eleks.playhttp.Controller.deleteUser(id: Long)
