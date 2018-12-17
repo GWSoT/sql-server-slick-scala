@@ -1,36 +1,25 @@
 package com.eleks.playhttp.repository
 
-import com.eleks.playhttp.data.models.tables.core.{BaseEntity, BaseTable}
-import slick.lifted.{CanBeQueryCondition, Rep, TableQuery}
+import com.eleks.playhttp.core.{BaseEntity, BaseTable}
+import slick.jdbc.SQLServerProfile
+import slick.lifted.{CanBeQueryCondition, Rep}
 import slick.jdbc.SQLServerProfile.api._
 
 
 trait BaseRepositoryQuery[T <: BaseTable[E], E <: BaseEntity] {
+  val query: SQLServerProfile.api.TableQuery[T]
 
-  val query: TableQuery[T]
+  def getByIdQuery(id: Long) = query.filter(_.id === id)
 
-  def getByIdQuery(id: Long) = {
-    query.filter(_.id === id)
-  }
+  def getAllQuery = query
 
-  def getAllQuery = {
-    query
-  }
-
-  def filterQuery[C <: Rep[_]](expr: T => C)(implicit wt: CanBeQueryCondition[C]) = {
+  def filterQuery[C <: Rep[_]](expr: T => C)(implicit wc: CanBeQueryCondition[C])= {
     query.filter(expr)
   }
 
-  def saveQuery(row: E) = {
-    query returning query += row
-  }
+  def saveQuery(row: E) = query returning query += row
 
-  def deleteByIdQuery(id: Long) = {
-    query.filter(_.id === id).delete
-  }
+  def deleteByIdQuery(id: Long) = query.filter(_.id === id).delete
 
-  def updateByIdQuery(id: Long, row: E) = {
-    query.filter(_.id === id).update(row)
-  }
-
+  def updateByIdQuery(id: Long, row: E) = query.filter(_.id === id).update(row)
 }

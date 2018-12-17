@@ -1,4 +1,6 @@
 # Routings
-GET    /users/:id            com.eleks.playhttp.Controller.getUser(id: Long)
-POST   /users                com.eleks.playhttp.Controller.saveUser
-DELETE /users/:id            com.eleks.playhttp.Controller.deleteUser(id: Long)
+GET         /v1/movies         com.eleks.playhttp.controllers.MovieController.getAll
+GET         /v1/schedules      com.eleks.playhttp.controllers.ScheduleController.getAll(genre: String ?= "")
+GET         /v1/schedules/:id   com.eleks.playhttp.controllers.ScheduleController.getById(id: Long)
+POST        /v1/movies         com.eleks.playhttp.controllers.MovieController.addMovie
+POST        /v1/schedules      com.eleks.playhttp.controllers.ScheduleController.addSchedule
