@@ -17,7 +17,9 @@ trait BaseRepositoryQuery[T <: BaseTable[E], E <: BaseEntity] {
     query.filter(expr)
   }
 
-  def saveQuery(row: E) = query returning query += row
+  def saveQuery(row: E) = {
+    query += row
+  }
 
   def deleteByIdQuery(id: Long) = query.filter(_.id === id).delete
 

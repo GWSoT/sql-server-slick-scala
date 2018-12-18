@@ -1,6 +1,4 @@
-# Todo 
-Sql Server Connection
-
+Added Sql Connection
 
 # PlayHttp
 Play2 Framework Demo

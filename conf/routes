@@ -1,6 +1,9 @@
 # Routings
-GET         /v1/movies         com.eleks.playhttp.controllers.MovieController.getAll
-GET         /v1/schedules      com.eleks.playhttp.controllers.ScheduleController.getAll(genre: String ?= "")
+GET         /v1/movies          com.eleks.playhttp.controllers.MovieController.getAll
+GET         /v1/schedules       com.eleks.playhttp.controllers.ScheduleController.getAll(genre: String ?= "")
 GET         /v1/schedules/:id   com.eleks.playhttp.controllers.ScheduleController.getById(id: Long)
-POST        /v1/movies         com.eleks.playhttp.controllers.MovieController.addMovie
-POST        /v1/schedules      com.eleks.playhttp.controllers.ScheduleController.addSchedule
+GET         /v1/schedules/:id   com.eleks.playhttp.controllers.MovieController.getById(id: Long)
+POST        /v1/movies          com.eleks.playhttp.controllers.MovieController.addMovie
+POST        /v1/schedules       com.eleks.playhttp.controllers.ScheduleController.addSchedule
+DELETE      /v1/schedules/:id   com.eleks.playhttp.controllers.ScheduleController.delete(id: Long)
+DELETE      /v1/movies/:id      com.eleks.playhttp.controllers.MovieController.delete(id: Long)

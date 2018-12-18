@@ -1,5 +1,7 @@
 package com.eleks.playhttp.repository
 
+import java.sql.SQLException
+
 import com.eleks.playhttp.core.{BaseEntity, BaseRepositoryComponent, BaseTable}
 import javax.inject.Inject
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
@@ -36,7 +38,7 @@ abstract class BaseRepository[T <: BaseTable[E], E <: BaseEntity : ClassTag] @In
     db.run(filterQuery(expr).result)
   }
 
-  def save(row: E): Future[E] = {
+  def save(row: E) = {
     db.run(saveQuery(row))
   }
 
@@ -45,7 +47,11 @@ abstract class BaseRepository[T <: BaseTable[E], E <: BaseEntity : ClassTag] @In
   }
 
   def deleteById(id: Long) = {
-    db.run(deleteByIdQuery(id))
+    try {
+      db.run(deleteByIdQuery(id))
+    } catch {
+      case _: SQLException => Future.successful(-1)
+    }
   }
 
 }

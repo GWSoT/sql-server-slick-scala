@@ -22,4 +22,6 @@ class ScheduleService @Inject() (scheduleRepository: ScheduleRepository, movieRe
   def getSchedulesInfo: Future[Seq[ScheduleResponse]] = scheduleRepository.getSchedulesInfo
 
   def getAllByGenre(genre: String): Future[Seq[ScheduleResponse]] = scheduleRepository.getAllByGenre(genre)
+
+  def deleteById(id: Long) = scheduleRepository.deleteById(id)
 }

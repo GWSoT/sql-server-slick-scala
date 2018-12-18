@@ -31,11 +31,21 @@ class ScheduleController @Inject() (scheduleService: ScheduleService)
 
   def addSchedule = Action.async(parse.json) {request =>
     val schedule = request.body.as[Schedule]
-    scheduleService.addSchedule(schedule).map(f => Created(Json.toJson(f)))
+    scheduleService.addSchedule(schedule).map {
+      case result if result > 0 => Created(Json.toJson(schedule))
+      case _ => NotAcceptable("Internal error occurred.")
+    }
   }
 
   def getById(id: Long) = Action.async {
     scheduleService.getScheduleInfo(id).map {
+      case Some(result) => Ok(Json.toJson(result))
+      case None => NotFound(s"Schedule with id $id not found")
+    }
+  }
+
+  def delete(id: Long) = Action.async {
+    scheduleService.deleteById(id).map {
       result => Ok(Json.toJson(result))
     }
   }
